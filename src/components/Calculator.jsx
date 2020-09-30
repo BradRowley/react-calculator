@@ -2,26 +2,54 @@ import React, { useState } from 'react'
 
 export function Calculator() {
   const [display, setDisplay] = useState(42)
-  const [firstNumber, setFirstNumber] = useState(null)
-  const [secondNumber, setSecondNumber] = useState(null)
+  const [firstNumber, setFirstNumber] = useState('')
+  const [secondNumber, setSecondNumber] = useState('')
 
   const [operator, setOperator] = useState(null)
 
   function clickClearButton(event) {
-    setFirstNumber(null)
+    setFirstNumber('')
+    setSecondNumber('')
+    setOperator(null)
     setDisplay(0)
   }
   function clickOnNumber(digit) {
     if (operator === null) {
-      setFirstNumber(digit)
-      setDisplay(digit)
+      if (firstNumber.includes('.') && digit === '.') {
+        alert('this is not allowed')
+      } else {
+        setFirstNumber(`${firstNumber}${digit}`)
+        setDisplay(`${firstNumber}${digit}`)
+      }
     } else {
-      setSecondNumber(digit)
-      setDisplay(digit)
+      if (secondNumber.includes('.') && digit === '.') {
+        alert('this is not allowed')
+      } else {
+        setSecondNumber(`${secondNumber}${digit}`)
+        setDisplay(`${secondNumber}${digit}`)
+      }
     }
   }
   function clickedOperator(selectOperator) {
     setOperator(selectOperator)
+  }
+  function clickedAmount() {
+    let result
+
+    if (operator === '+') {
+      result = Number(firstNumber) + Number(secondNumber)
+    }
+    if (operator === '-') {
+      result = Number(firstNumber) - Number(secondNumber)
+    }
+    if (operator === '*') {
+      result = Number(firstNumber) * Number(secondNumber)
+    }
+    if (operator === '/') {
+      result = Number(firstNumber) / Number(secondNumber)
+    }
+
+    setDisplay(result)
   }
   return (
     <main>
@@ -96,7 +124,14 @@ export function Calculator() {
             0
           </button>
           <button className="button">.</button>
-          <button className="button op">&#61;</button>
+          <button
+            className="button op"
+            onClick={function () {
+              clickedAmount()
+            }}
+          >
+            &#61;
+          </button>
         </div>
       </div>
     </main>
