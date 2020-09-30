@@ -122,7 +122,14 @@ export function Calculator() {
           <button className="button x2" onClick={() => clickOnNumber(0)}>
             0
           </button>
-          <button className="button">.</button>
+          <button
+            className="button"
+            onClick={function () {
+              clickOnNumber('.')
+            }}
+          >
+            .
+          </button>
           <button
             className="button op"
             onClick={function () {
