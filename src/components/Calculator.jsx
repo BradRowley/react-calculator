@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export function Calculator() {
-  const [display, setDisplay] = useState(42)
+  const [display, setDisplay] = useState(0)
   const [firstNumber, setFirstNumber] = useState('')
   const [secondNumber, setSecondNumber] = useState('')
 
@@ -35,7 +35,9 @@ export function Calculator() {
   }
   function clickedAmount() {
     let result
-
+    if (operator === '/') {
+      result = Number(firstNumber) / Number(secondNumber)
+    }
     if (operator === '+') {
       result = Number(firstNumber) + Number(secondNumber)
     }
@@ -44,9 +46,6 @@ export function Calculator() {
     }
     if (operator === '*') {
       result = Number(firstNumber) * Number(secondNumber)
-    }
-    if (operator === '/') {
-      result = Number(firstNumber) / Number(secondNumber)
     }
 
     setDisplay(result)
