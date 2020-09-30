@@ -21,7 +21,7 @@ export function Calculator() {
     }
   }
   function clickedOperator(selectOperator) {
-    selectOperator(selectOperator)
+    setOperator(selectOperator)
   }
   return (
     <main>
